@@ -35,7 +35,7 @@
           description="Compile Java sources and copy to WEB-INF/classes dir">
     <javac srcdir="${src.home}"
           destdir="${work.home}/WEB-INF/classes">
-		  <classpath refid="compile.classpath"/>
+		  <classpath refid="aws.java.sdk.classpath"/>
     </javac>
   </target>
 
