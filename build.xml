@@ -1,4 +1,4 @@
-<project name="ec2imageProcessing" default="run" basedir="./ec2imageProcessing">
+<project name="ec2ImageProcessing" default="run" basedir="./ec2ImageProcessing">
   <path id="aws.java.sdk.classpath">
     <fileset dir="./ec2imageProcessing/WebContent/WEB-INF/lib" includes="**/*.jar"/>
     <pathelement location="lib"/>
@@ -6,7 +6,7 @@
   </path>
 
   <!-- Define the properties used by the build -->
-  <property name="app.name"      value="ec2imageProcessing"/>
+  <property name="app.name"      value="ec2ImageProcessing"/>
   <property name="work.home"    value="${basedir}/work"/>
   <property name="dist.home"     value="${basedir}/dist"/>
   <property name="src.home"      value="${basedir}/src"/>
