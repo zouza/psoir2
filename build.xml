@@ -1,0 +1,50 @@
+<project name="ec2imageProcessing" default="run" basedir="./ec2imageProcessing">
+  <path id="aws.java.sdk.classpath">
+    <fileset dir="./ec2imageProcessing/WebContent/WEB-INF/lib" includes="**/*.jar"/>
+    <pathelement location="lib"/>
+    <pathelement location="."/>
+  </path>
+
+  <!-- Define the properties used by the build -->
+  <property name="app.name"      value="ec2imageProcessing"/>
+  <property name="work.home"    value="${basedir}/work"/>
+  <property name="dist.home"     value="${basedir}/dist"/>
+  <property name="src.home"      value="${basedir}/src"/>
+  <property name="web.home"      value="${basedir}"/>
+
+  <target name="all" depends="clean,compile,dist"
+          description="Clean work dirs, then compile and create a WAR"/>
+
+  <target name="clean"
+          description="Delete old work and dist directories">
+    <delete dir="${work.home}"/>
+    <delete dir="${dist.home}"/>
+  </target>
+
+  <target name="prepare" depends="clean"
+          description="Create working dirs and copy static files to work dir">
+    <mkdir  dir="${dist.home}"/>
+    <mkdir  dir="${work.home}/WEB-INF/classes"/>
+    <!-- Copy static HTML and JSP files to work dir -->
+    <copy todir="${work.home}">
+      <fileset dir="${web.home}"/>
+    </copy>
+  </target>
+
+  <target name="compile" depends="prepare"
+          description="Compile Java sources and copy to WEB-INF/classes dir">
+    <javac srcdir="${src.home}"
+          destdir="${work.home}/WEB-INF/classes">
+        <classpath refid="compile.classpath"/>
+    </javac>
+  </target>
+
+  <target name="dist" depends="compile"
+          description="Create WAR file for binary distribution">
+    <jar jarfile="${dist.home}/${app.name}.war"
+         basedir="${work.home}"/>
+  </target>
+
+  <target name="test" depends="dist">
+  </target>
+</project>
